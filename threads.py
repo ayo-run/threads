@@ -7,26 +7,12 @@ from . import utils
 threads = Blueprint('threads', __name__, template_folder='templates', static_folder='static')
 
 thread_ids = [
-    '115620814664415087',
-    '115090396384901152',
-    '114700726180478526',
+    '116245553803866191',
     '114649657564007543',
-    '114598027067799906',
     '114490408596372783',
-    '114424567700847705',
-    '114202630459242553',
     '114012659479108663',
-    '113986386529736815',
-    '113775430984622212',
     '113650907203476875',
     '113449531956042438',
-    '113300434695033812',
-    '113210189309775644',
-    '113073168505436055',
-    '112979161274124372',
-    '112857903897175549',
-    '112857168376771706',
-    '112524983806134679',
 ]
 
 ###########################################################
@@ -88,8 +74,14 @@ def fetch_statuses(ids):
     response = requests.get(server() + '/api/v1/statuses?id[]=' + query_params )
     if response.status_code == 200:
         statuses = response.json()
+
+        # When you need to check for missing statuses:
+        # missing_ids = [s for s in thread_ids if not any(s in d.values() for d in statuses)]
+        # print(f"missing: {missing_ids}")
+
         return statuses
     else:
+        print(f"response status code: {response.status_code}")
         return []
 
 def fetch_thread(id):
