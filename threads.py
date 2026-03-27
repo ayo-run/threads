@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, current_app, redirect, url_for
 import requests
 from datetime import datetime
 from .cache import cache
@@ -152,6 +152,8 @@ def thread(id):
         if len(status['summary']) > max_length:
             status['summary'] = status['summary'][:max_length] + '...'
         return render_template('_home.html', threads=[status], app=app, attribution=attribution, render_date=datetime.now())
+    else:
+        return redirect(url_for('threads.home'))
 
 @threads.route('/api')
 @cache.cached(timeout=300)
