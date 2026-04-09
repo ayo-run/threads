@@ -7,7 +7,6 @@ from . import utils
 threads = Blueprint('threads', __name__, template_folder='templates', static_folder='static')
 
 thread_ids = [
-    '116374067833449872',
     '116364343818471960',
     '116352859731078602',
     '116312536977108702',
