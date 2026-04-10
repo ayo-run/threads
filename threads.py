@@ -118,6 +118,7 @@ def get_descendants(server, status):
 @cache.cached(timeout=300)
 def home():
     statuses = fetch_statuses(thread_ids)
+    statuses = [utils.clean_status(s) for s in statuses]
     attribution = get_attribution()
     app = get_app_config()
     tags = []
